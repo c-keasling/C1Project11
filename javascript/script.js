@@ -30,14 +30,73 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   document.querySelector(".landing").classList.add("slide-in");
 });
-
+// adding form modal pop up action
 const contact = document.getElementById("contact");
 const closeBtn = document.querySelector(".close-modal");
+const overlay = document.querySelector(".overlay");
+
+const closeModal = function () {
+  document.querySelector(".modal").classList.add("hidden");
+  document.querySelector(".overlay").classList.add("hidden");
+};
 
 contact.addEventListener("click", function () {
   document.querySelector(".modal").classList.toggle("hidden");
+  overlay.classList.toggle("hidden");
 });
 
-closeBtn.addEventListener("click", function () {
-  document.querySelector(".modal").classList.add("hidden");
+closeBtn.addEventListener("click", closeModal);
+
+overlay.addEventListener("click", closeModal);
+
+//validating form
+const form = document.getElementById("contactForm");
+const submitButton = document.getElementById("submit");
+const successMessage = document.getElementById("form-submitted-msg");
+const formElements = [...form.elements].filter((el) => el.type !== "submit");
+
+const allInputsValid = () => {
+  return formElements.every((element) => element.checkValidity());
+};
+
+const validateAndStyleFields = () => {
+  let hasErrors = false;
+
+  formElements.forEach((element) => {
+    if (!element.checkValidity()) {
+      element.style.borderColor = "red";
+      element.nextElementSibling.style.color = "red";
+      element.nextElementSibling.style.display = "block";
+      element.previousElementSibling.style.color = "red";
+      hasErrors = true;
+    } else {
+      element.style.borderColor = "green";
+      element.nextElementSibling.style.color = "#CED4DA";
+      element.nextElementSibling.style.display = "none";
+      element.previousElementSibling.style.color = "#212529";
+    }
+  });
+
+  return hasErrors;
+};
+
+submitButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const hasValidationErrors = validateAndStyleFields();
+
+  if (hasValidationErrors) {
+    submitButton.disabled = false;
+  } else {
+    successMessage.style.display = "block";
+    form.reset();
+    submitButton.disabled = true;
+    console.log("okay");
+    setTimeout(() => {
+      formElements.forEach((element) => {
+        element.style.borderColor = "black";
+      });
+      successMessage.style.display = "none";
+    }, 1500);
+  }
 });
