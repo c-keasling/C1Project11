@@ -8,14 +8,7 @@ function toggleMode() {
 modeToggle.addEventListener("click", toggleMode);
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM is loaded"); // Check if DOM is loaded
-
   const sections = document.querySelectorAll(".Career, .Projects");
-
-  sections.forEach((sec) => {
-    console.log("Section:", sec);
-  });
-
   const options = {
     threshold: 0.1,
   };
@@ -36,4 +29,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
   document.querySelector(".landing").classList.add("slide-in");
+});
+
+const contact = document.getElementById("contact");
+const closeBtn = document.querySelector(".close-modal");
+
+contact.addEventListener("click", function () {
+  document.querySelector(".modal").classList.toggle("hidden");
+});
+
+closeBtn.addEventListener("click", function () {
+  document.querySelector(".modal").classList.add("hidden");
 });
