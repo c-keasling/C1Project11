@@ -428,9 +428,33 @@ img {
   }
   .form-btns > .submit {
     padding-inline: 3rem;
+    padding: 10px 20px;
+  border: none;
+  background-color: #007BFF;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
   }
 
-  
+  .form-label {
+    top: 10px;
+    left: 15px;
+    color: #0010e9;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.message {
+  padding-top: 25px;
+}
+
+.card-img-top {
+  width: 100%;
+  max-width: 100%; 
+  height: auto;
+}
+
 
 
 
